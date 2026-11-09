@@ -1,5 +1,8 @@
 **Cybersecurity Homelab: Tracking attackers by geo location**
 
+<img width="1920" height="599" alt="map screenshot" src="https://github.com/user-attachments/assets/cc03a59a-83ef-4a31-adc8-419d65ddfe99" />
+
+
 Description:
 
 This cybersecurity project involves deploying a virtual machine using Azure, disabling it's firewall to make it vulnerable to attackers, and then using Azure's Log Analytics Workspace to query the attacks. The final result is a dashboard of a geo map of the attacks by location, which is created using a .json script.
@@ -26,3 +29,4 @@ Operating Systems used:
 
 ![]
 <img width="1920" height="834" alt="screenshot1" src="https://github.com/user-attachments/assets/d93a2103-2ce5-4ae5-9701-fdd6810be611" />
+

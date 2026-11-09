@@ -228,6 +228,7 @@ Final stage: Uploading a map.json script into a workbook to generate our geoip m
 
 Then, go into the advanced editor, and paste this .json script:
 
+```
 {
         "type": 3,
         "content": {
@@ -261,3 +262,6 @@ Then, go into the advanced editor, and paste this .json script:
         },
         "name": "query - 0"
 }
+```
+
+

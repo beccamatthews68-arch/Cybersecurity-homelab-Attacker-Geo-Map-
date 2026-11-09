@@ -206,6 +206,9 @@ Stage 4: converting Ip addresses to geo locations
 In order to create our geo map of attackers, we need to convert our attacker’s ipaddresses to locations. Luckily, there is a document that achieves just this:
 
 https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/misc/geoip-summarized.csv 
+
+Follow the link above to download the csv file.
+
 Next, create a Watchlist within Microsoft Sentinel:
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/349f4eca-4f18-46fb-874f-8517d5b5776c" />

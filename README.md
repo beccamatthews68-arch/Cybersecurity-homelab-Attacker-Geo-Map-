@@ -1,6 +1,6 @@
 **Cybersecurity Homelab: Tracking attackers by geo location**
 
-<img width="1920" height="599" alt="map screenshot" src="https://github.com/user-attachments/assets/cc03a59a-83ef-4a31-adc8-419d65ddfe99" />
+<img width="3840" height="1198" alt="map screenshot" src="https://github.com/user-attachments/assets/cc03a59a-83ef-4a31-adc8-419d65ddfe99" />
 
 
 Description:
@@ -263,5 +263,12 @@ Then, go into the advanced editor, and paste this .json script:
         "name": "query - 0"
 }
 ```
+
+3. Select ‘done editing’ and your attacker map should materialise! Name it something dramatic such as ‘Attacker geo map’.
+
+
+Congratulations-you are now officially a spy!
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d1cd1175-2074-46e9-90c9-2b966989b695" />
 
 

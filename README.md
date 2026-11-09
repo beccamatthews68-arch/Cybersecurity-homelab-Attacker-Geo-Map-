@@ -7,6 +7,7 @@ Description:
 
 This cybersecurity project involves deploying a virtual machine using Azure, disabling it's firewall to make it vulnerable to attackers, and then using Azure's Log Analytics Workspace to query the attacks. The final result is a dashboard showcasing a geo map of the attacks by location, which is created using a .json script.
 
+
 Environments and technologies used:
 
 - Microsoft Azure
@@ -20,6 +21,7 @@ Operating Systems used:
 
 - Windows 10
 - Windows 11 Pro
+
 
 **Step 1: deploy a virtual machine in Azure**
 
@@ -63,15 +65,18 @@ Under networking, Azure will automatically create a new Virtual network. Ensure 
 Make sure the ‘I accept the license terms’ box is checked under the basic tab, then hit review + create, then create.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3822dbaf-f371-4118-aae0-8a48d29f8be6" />
+
 Now the virtual machine is being deployed…
 
 After it is deployed, hit ‘go to resource’. You’ll be greeted by this page overview of the virtual machine:
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fadda7c8-4a95-4d3e-b6a1-4c10b250bca1" />
 
 Step 2: Configure the virtual machine to be vulnerable to attackers 
 
 
 1. First, lets connect to your new VM, then test its connectivity to the internet.
+   
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/97607ebd-758d-4be4-9860-d4e5985e9f12" />
 
 
@@ -81,6 +86,7 @@ Enter the IP address, followed by the username and password you created for the 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/30b70abd-c998-42b4-9413-0e73c8e5ade6" />
 
 Once logged into the VM, go to the start menu and type ‘powershell’. Choose to run as administrator.
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dda5bb38-9866-4c6d-a0fc-c7a517cd88f2" />
 
 Inside powershell, type ‘ping 8.8.8.8’
@@ -103,9 +109,11 @@ Under source, choose Any, because we want to allow any inbound traffic from any 
 For priority, put 100-This is a system that lists rules by priority-the higher the number, the higher the priority.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/656d434e-6ee7-4d9b-a939-3c33f3b2cdd4" />
+
 Name the rule something dramatic such as ‘DANGER_AllowAnyCustomPorts’ as this makes it easy for us to spot that it is a rule that makes our VM vulnerable to attackers.
 
 3. Disable the firewall internally inside of the Virtual Machine
+   
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0a0f5caa-8053-4b3f-823f-911d781bb8a8" />
 
 In the windows search bar, open ‘Windows Firewall’ and disable the firewalls. Now your virtual machine is fully vulnerable to attackers.
@@ -115,9 +123,11 @@ In the windows search bar, open ‘Windows Firewall’ and disable the firewalls
 Next, we are going to get an understanding of the Event Viewer. The Event Viewer logs activity relating to the Virtual Machine, such as successful and failed log in attempts.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b6299dda-dfae-46e5-9fc5-0e8b142c1acd" />
+
 Start by logging out of your VM. Then purposely fail to log in 4 times using a random username and password.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/34d7619d-0645-4a61-a024-117732be6654" />
+
 After this, log in with your correct credentials, then inspect the Event Viewer. You should see 4 activity logs with the Event ID 4625. This ID means a failed log in attempt.
 
 
@@ -128,10 +138,13 @@ Stage 3: Querying the log in attempts
 1. Create Log Analytics Workspace
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/046bcaa1-05db-4cf4-9ac7-7734dd33dd49" />
+
 2. Create Sentinel and connect it to the LAW 
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b468409c-7cb6-4eda-947d-016b5352b9e7" />
+
 You may run into this error when attempting to create a Microsoft Sentinel. This error means that the region for the LAW that you have chosen is not supported in Sentinel. My workaround for this was creating a LAW in a supported region-you may need to google which these are, but the region of France Central worked for me, as shown below.
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2350153b-3551-46cd-80f7-e15da2a41501" />
 
 
@@ -140,25 +153,31 @@ You may run into this error when attempting to create a Microsoft Sentinel. This
 This creates an agent that acts as the link between your virtual machine and the Microsoft Sentinel.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ce9f4737-0c1c-4941-b3f0-fbc9248a475e" />
+
 Once your Microsoft Sentinel is installed, go to Content Manager > Content Hub.
 In the content hub, search ‘Windows Security Events’ and click install.
 
 Once this is installed, the status will update to ‘installed’. Now select ‘Windows Security Events via AMA’ (this is the agent) and hit ‘manage’. 
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b7ce9862-2bff-49d6-92a0-6673c6039caa" />
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e5da7afd-d458-43e9-ad01-b8364154aeaa" />
+
 Select ‘Create data collection rule’ . Name the rule ‘DCR Wizard’, and ensure that it is added to the correct subscription and resource group.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/811ddea3-18e0-4b42-bd65-850ead449c78" />
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9297b381-4e12-437e-ae9b-7513149e4f7d" />
+
 Under the VM’s extensions and applications, the agent we created should now appear.
 
 
 4. Querying the data in KQL 
 
 Return to your Log Analytics Workspace, open log, choose the KQL mode (this is the query language, another example of a query language is SQL) from simple mode, and run this query: SecurityEvent
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a81c0e11-1a14-4135-8273-2e76eb0bbd76" />
+
 This will return all of the security events on the virtual machine, in the form of a table spreadsheet.
 
 Next, run this query:
@@ -169,6 +188,7 @@ SecurityEvent
 This will filter the results where the EventID is 4625, meaning that it will only return events where the log in attempt failed. This is because we are only interested in data from our attackers!
 
 We can also narrow the columns down to what we are interested in, such as TimeGenerated, Account, Computer, EventID, Activity, and IpAddress:
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/bb311498-1d84-4519-95d0-994f2e761659" />
 
 
@@ -178,7 +198,6 @@ Stage 4: converting Ip addresses to geo locations
 
 In order to create our geo map of attackers, we need to convert our attacker’s ipaddresses to locations. Luckily, there is a document that achieves just this:
 
-Download: geoip-summarized.csv
 https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/misc/geoip-summarized.csv 
 Next, create a Watchlist within Microsoft Sentinel:
 
@@ -269,6 +288,6 @@ Then, go into the advanced editor, and paste this .json script:
 
 Congratulations-you are now officially a spy!
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d1cd1175-2074-46e9-90c9-2b966989b695" />
+<img width="3840" height="1198" alt="map screenshot" src="https://github.com/user-attachments/assets/cc03a59a-83ef-4a31-adc8-419d65ddfe99" />
 
 

@@ -212,7 +212,8 @@ Under source, select Local File. The file type we downloaded was a csv file. Lea
 
 Now lets return to our query, adding in the new geoip watchlist (this adds in data such as country, city, which we need for our geo map. Notice that the original WindowsSecurity table from our Virtual Machine had IpAddress data but no location data-this is why we needed to add the geoip document).
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1abaa75c-ea30-4620-9dfd-86e2855f8e3c" />
+<img width="1200" height="400" alt="cropped query" src="https://github.com/user-attachments/assets/e7ab19fc-e23c-4b1e-be87-e3f196b0dbf2" />
+
 
 
 Lets break this query down to understand it.

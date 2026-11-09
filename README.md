@@ -3,9 +3,7 @@
 <img width="3840" height="1198" alt="map screenshot" src="https://github.com/user-attachments/assets/cc03a59a-83ef-4a31-adc8-419d65ddfe99" />
 
 
-Description:
 
-This cybersecurity project involves deploying a virtual machine using Azure, disabling it's firewall to make it vulnerable to attackers, and then using Azure's Log Analytics Workspace to query the attacks. The final result is a dashboard showcasing a geo map of the attacks by location, which is created using a .json script.
 
 
 Environments and technologies used:

@@ -27,7 +27,7 @@ Operating Systems used:
 
 2\. Create a resource group:
 
-![]
+
 <img width="1920" height="834" alt="screenshot1" src="https://github.com/user-attachments/assets/d93a2103-2ce5-4ae5-9701-fdd6810be611" />
 
 A resource group is like a folder that stores your virtual machine(s).
@@ -55,4 +55,12 @@ For region, find the nearest one to you with available space. The closer your vi
 Try to choose a size of 2vcpus or above, as this will make the machine run quicker. Don’t worry about the pricing listed-this is only an estimate for if the virtual machine was running 24/7-we will only run it for the duration of the project.
 
 <img width="1112" height="1080" alt="screenshot5" src="https://github.com/user-attachments/assets/b2eab767-487d-4a84-a341-8281e741df59" />
+Under Administrator account: set your username as something simple such as ‘azureuser’, then choose a strong password. I would recommend noting these down in notepad (but do not do this in real life!).
+
+<img width="1920" height="1080" alt="screenshot6" src="https://github.com/user-attachments/assets/399f9348-7380-49b8-b952-349458cddb06" />
+Under networking, Azure will automatically create a new Virtual network. Ensure your subnet falls under that network in the drop down menu.
+
+Make sure the ‘I accept the license terms’ box is checked under the basic tab, then hit review + create, then create.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3822dbaf-f371-4118-aae0-8a48d29f8be6" />
 

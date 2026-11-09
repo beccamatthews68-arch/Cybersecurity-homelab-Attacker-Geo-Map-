@@ -30,3 +30,11 @@ Operating Systems used:
 ![]
 <img width="1920" height="834" alt="screenshot1" src="https://github.com/user-attachments/assets/d93a2103-2ce5-4ae5-9701-fdd6810be611" />
 
+A resource group is like a folder that stores your virtual machine(s).
+Search for resource groups, then select. This will take you to a list of resource groups. If new to Azure, this will be empty. To create your first resource group, go to Create.
+
+
+<img width="1199" height="719" alt="screenshot2" src="https://github.com/user-attachments/assets/dd463927-08c7-4395-94c7-a204b46f180a" />
+
+Name it: RG-SOC-Lab
+Under subscription will be your Azure subscription that you created. Under region, choose your region, or the closest region to you.

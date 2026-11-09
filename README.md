@@ -184,5 +184,80 @@ Next, create a Watchlist within Microsoft Sentinel:
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/349f4eca-4f18-46fb-874f-8517d5b5776c" />
 
+Name and alias the watchlist ‘geoip’
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2daaf8d8-52b0-4c8c-bfe6-d979d4ec72f8" />
+
+Under source, select Local File. The file type we downloaded was a csv file. Leave the number of lines before row with headings as 0. For SearchKey, choose network.
 
 
+Now lets return to our query, adding in the new geoip watchlist (this adds in data such as country, city, which we need for our geo map. Notice that the original WindowsSecurity table from our Virtual Machine had IpAddress data but no location data-this is why we needed to add the geoip document).
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4dbb2905-394a-41a2-97f0-6b3468fbd936" />
+
+Lets break this query down to understand it.
+
+Let GeoIPDB_FULL = _GetWatchlist(“geoip”);
+-retrieves the geoip watchlist
+
+let WindowsEvents = SecurityEvent
+-Creates a table for our data
+
+| where EventID == 4625
+-filters EventID by failed log in attempts only
+
+| order by TimeGenerated desc
+-orders the data by the time that the event occurred, in descending order (most recent event first)
+
+| evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network);
+ -performs a geo-location lookup of an IPv4 address against a specific database to determine its associated network segment. 
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4dc49e94-0246-42fd-9780-bfaf28e5260e" />
+
+We can also narrow our search down to one specific IpAddress-pick a random one and input it into a ‘where’ clause, similar to how we filtered results by EventID = 4625.
+
+
+Final stage: Uploading a map.json script into a workbook to generate our geoip map
+
+
+1. First, return to your Microsoft Sentinel, and create a new workbook.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ad7f6150-9e6d-486b-86ad-2e5603f6ae77" />
+
+2. Go into edit mode to delete the current query, then add data source + visualisation.
+
+Then, go into the advanced editor, and paste this .json script:
+
+{
+        "type": 3,
+        "content": {
+        "version": "KqlItem/1.0",
+        "query": "let GeoIPDB_FULL = _GetWatchlist(\"geoip\");\nlet WindowsEvents = SecurityEvent;\nWindowsEvents | where EventID == 4625\n| order by TimeGenerated desc\n| evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network)\n| summarize FailureCount = count() by IpAddress, latitude, longitude, cityname, countryname\n| project FailureCount, AttackerIp = IpAddress, latitude, longitude, city = cityname, country = countryname,\nfriendly_location = strcat(cityname, \" (\", countryname, \")\");",
+        "size": 3,
+        "timeContext": {
+                "durationMs": 2592000000
+        },
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "visualization": "map",
+        "mapSettings": {
+                "locInfo": "LatLong",
+                "locInfoColumn": "countryname",
+                "latitude": "latitude",
+                "longitude": "longitude",
+                "sizeSettings": "FailureCount",
+                "sizeAggregation": "Sum",
+                "opacity": 0.8,
+                "labelSettings": "friendly_location",
+                "legendMetric": "FailureCount",
+                "legendAggregation": "Sum",
+                "itemColorSettings": {
+                "nodeColorField": "FailureCount",
+                "colorAggregation": "Sum",
+                "type": "heatmap",
+                "heatmapPalette": "greenRed"
+                }
+        }
+        },
+        "name": "query - 0"
+}

@@ -27,7 +27,7 @@ Operating Systems used:
 
 1\. Create your Azure Subscription.
 
-Navigate to https://portal.azure.com/auth/login/ and create an account. Then in the search bar, search 'subscriptions'. Finally, hit 'add'. You can leave all settings as default-then hit review + create.
+Navigate to portal.azure.com and create an account. Then in the search bar, search 'subscriptions'. Finally, hit 'add'. You can leave all settings as default-then hit review + create.
 
 
 <img width="1616" height="563" alt="cropped sh" src="https://github.com/user-attachments/assets/0a0118f7-e705-43dd-9779-6fbf7fef31f7" />

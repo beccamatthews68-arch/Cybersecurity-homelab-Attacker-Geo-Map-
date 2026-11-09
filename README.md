@@ -27,6 +27,11 @@ Operating Systems used:
 
 1\. Create your Azure Subscription.
 
+Go to Azure and create an account. Then in the search bar, search 'subscriptions'. Finally, hit 'add'. You can leave all settings as default-then hit review + create.
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d37d98e5-fd89-4e31-925f-b1315ac79a04" />
+
+
 2\. Create a resource group:
 
 

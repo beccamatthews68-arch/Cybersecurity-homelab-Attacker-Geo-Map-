@@ -27,3 +27,4 @@ Operating Systems used:
 2\. Create a resource group:
 
 ![]
+<img width="1920" height="834" alt="screenshot1" src="https://github.com/user-attachments/assets/d93a2103-2ce5-4ae5-9701-fdd6810be611" />

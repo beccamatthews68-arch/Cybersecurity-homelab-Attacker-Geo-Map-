@@ -1,5 +1,3 @@
-# Cybersecurity-homelab-Attacker-Geo-Map-
-
 **Cybersecurity Homelab: Tracking attackers by geo location**
 
 Description:
